@@ -10,9 +10,9 @@
 <body>
 <th:block th:replace="~{layout :: header}"></th:block>
 <div class="container">
-  <div class="row justify-content-center">
+  <div class="row justify-content-center" style="justify-content: space-around">
     <div class="col-lg-6 col-md-8">
-      <h3 class="card-title text-center">Login</h3>
+      <h3 class="card-title text-center" style="margin-top:120px">Login</h3>
       <form th:action="@{/login}" method="post">
         <fieldset>
           <legend>Please login</legend>
@@ -24,15 +24,15 @@
           </div>
           <div class="mb-3">
             <label for="username" class="form-label">Username: </label>
-            <input type="text" required class="form-control" id="username" name="username">
+            <input type="text" style="width: 100%;" required class="form-control" id="username" name="username">
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password: </label>
-            <input type="password" required class="form-control" id="password" name="password">
+            <input type="password" style="width: 100%;" required class="form-control" id="password" name="password">
           </div>
           <div class="mb-3">
             <input type="checkbox" name="remember-me" id="remember-me">
-            <label for="remember-me">Remember me</label>
+            <label style="display:inline" for="remember-me">Remember me</label>
           </div>
           <div class="d-grid gap-2 form-action">
             <button type="submit" class="btn btn-primary">Login</button>
