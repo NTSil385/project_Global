@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{ADMIN}">
+<head>
+    <meta charset="UTF-8">
+    <title>FI</title>
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+    <th:block th:replace="~{layout::link-css}"></th:block>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+
+
+
+
+    <!-- favicons
+    ================================================== -->
+    <link  rel="apple-touch-icon" sizes="180x180" th:href="@{apple-touch-icon.png}">
+    <link  rel="icon" type="image/png" sizes="32x32" th:href="@{favicon-32x32.png}">
+    <link  rel="icon" type="image/png" sizes="16x16" th:href="@{favicon-16x16.png}">
+    <link  rel="manifest" th:href="@{site.webmanifest}">
+    <link rel="stylesheet" th:href="@{https://unpkg.com/swiper/swiper-bundle.min.css}">
+    <script th:src="@{https://unpkg.com/swiper/swiper-bundle.min.js}"></script>
+    <script th:src="@{/js/swiper.js}" defer="defer"></script>
+</head>
+
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div layout:fragment="content">
+
+    <div class="container" style="margin: 110px">
+
+        <form th:action="@{/admin/create}" th:object="${product}" enctype="multipart/form-data" method="post" style="display:flex; justify-content: center;">
+            <div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="name" >Name: </label>
+                    <input  style=" width: 100%; height: 40px;" type="text" th:field="*{name}" id="name">
+                    <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="des" >Description: </label>
+                    <textarea class="form-control"  style=" width: 100%;" type="text" th:field="*{des}" id="des"></textarea>
+                    <span class="text-danger" th:if="${#fields.hasErrors('des')}" th:errors="*{des}"></span>
+                </div>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="image" >Image: </label>
+                    <input style=" width: 100%; height: 40px;"  type="file" name="imageProduct" id="image" accept="img/png,img/jpeg">
+                </div>
+                <select name="categoryId">
+                    <option th:each="category : ${cate}" th:value="${category.id_category}" th:text="${category.name}"></option>
+                </select>
+                <div class="col-6 mb-3">
+                    <label class="form-label" for="price" >Price: </label>
+                    <input style=" width: 100%; height: 40px;" type="text" th:field="*{price}" id="price">
+                    <span class="text-danger" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Save">
+            </div>
+        </form>
+        <!-- end s-content -->
+    </div>
+
+</div>
+<script th:src="@{js/plugins.js}"></script>
+<script th:src="@{js/main.js}"></script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>FI</title>
+    <th:block th:replace="layout::link-css"></th:block>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div layout:fragment="content">
+
+    <div class="container" style="margin: 110px">
+        <div class="row">
+            <div  th:each="product:${productById}" class="col-9 col-md-9">
+                <div class="thumbnail" style="border: 1px solid #ccc; display:flex; justify-content:center; border-radius:6px">
+                    <img  style="max-width: 100%; height: auto" th:src="@{/img/} + ${product.image}">
+                </div>
+                <div class="caption" style="margin-top: 10px">
+
+                    <strong>Brand: </strong><div th:text="${product.category.name}"></div>
+
+                </div>
+                <strong>Description:</strong> </strong><div th:text="${product.des}"></div>
+                <strong>Price:</strong> </strong><div th:text="${product.price}"></div>
+
+
+                <p style="margin: 20px 0px">
+                    <a th:href="@{/shoppingcart/add/{id}(id=${product.id})}" class="btn btn-primary">Add</a>
+                    <a th:href="@{/shop}" class="btn btn-primary" >Back</a>
+                </p>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- end s-content -->
+</div>
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>

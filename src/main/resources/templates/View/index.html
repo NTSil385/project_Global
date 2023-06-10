@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{Layout}">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
 <head>
   <meta charset="UTF-8">
   <title>FI</title>
@@ -9,10 +8,7 @@
 <body>
 <th:block th:replace="layout::header"></th:block>
 <div layout:fragment="content">
-  <section id="content" class="s-content">
-
-
-    <!-- hero -->
+  <section id="content" class="s-content"><!-- hero -->
     <div class="hero">
 
       <div class="hero__slider swiper-container">

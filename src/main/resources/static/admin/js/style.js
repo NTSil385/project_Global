@@ -8,8 +8,8 @@
     'use strict';
 
 
-   /* preloader
-    * -------------------------------------------------- */
+    /* preloader
+     * -------------------------------------------------- */
     const ssPreloader = function() {
 
         const siteBody = document.querySelector('body');
@@ -17,7 +17,7 @@
         if (!preloader) return;
 
         html.classList.add('ss-preload');
-        
+
         window.addEventListener('load', function() {
             html.classList.remove('ss-preload');
             html.classList.add('ss-loaded');
@@ -34,15 +34,14 @@
     }; // end ssPreloader
 
 
-   /* mobile menu
-    * ---------------------------------------------------- */ 
+    /* mobile menu
+     * ---------------------------------------------------- */
     const ssMobileMenu = function() {
 
         const toggleButton = document.querySelector('.s-header__menu-toggle');
         const mainNavWrap = document.querySelector('.s-header__nav-wrap');
         const mainNav = document.querySelector('.s-header__nav');
-        const parentMenus = mainNav ? mainNav.querySelectorAll('.has-children') : [];
-
+        const parentMenus = mainNav.querySelectorAll('.has-children');
         const siteBody = document.querySelector('body');
 
         if (!(toggleButton && mainNavWrap)) return;
@@ -55,7 +54,7 @@
             scrollLock.getScrollState() ? scrollLock.disablePageScroll(mainNavWrap) : scrollLock.enablePageScroll(mainNavWrap);
         });
 
-        // open (or close) submenu items in mobile view menu. 
+        // open (or close) submenu items in mobile view menu.
         // close all the other open submenu items.
         mainNav.addEventListener('click', function(e) {
 
@@ -176,8 +175,8 @@
     }; // end ssMasonry
 
 
-   /* animate masonry elements if in viewport
-    * ------------------------------------------------------ */
+    /* animate masonry elements if in viewport
+     * ------------------------------------------------------ */
     const ssAnimateBricks = function() {
 
         const animateBlocks = document.querySelectorAll('[data-animate-block]');
@@ -208,13 +207,13 @@
                 });
 
             });
-            
+
             p.then(function() {
                 current.classList.add('ss-animated');
             });
         }
 
-        // animate on scroll 
+        // animate on scroll
         function animateOnScroll() {
 
             let scrollY = window.pageYOffset;
@@ -238,8 +237,8 @@
     }; // end ssAnimateOnScroll
 
 
-   /* swiper
-    * ------------------------------------------------------ */ 
+    /* swiper
+     * ------------------------------------------------------ */
     const ssSwiper = function() {
 
         const mySwiper = new Swiper('.swiper-container', {
@@ -249,7 +248,7 @@
             speed: 1000,
             pagination: {
                 el: '.swiper-pagination',
-                clickable: true, 
+                clickable: true,
                 renderBullet: function (index, className) {
                     return '<span class="' + className + '">' + (index + 1) + '</span>';
                 }
@@ -260,12 +259,12 @@
     }; // end ssSwiper
 
 
-   /* alert boxes
-    * ------------------------------------------------------ */
+    /* alert boxes
+     * ------------------------------------------------------ */
     const ssAlertBoxes = function() {
 
         const boxes = document.querySelectorAll('.alert-box');
-  
+
         boxes.forEach(function(box){
 
             box.addEventListener('click', function(event) {
@@ -306,8 +305,8 @@
     }; // end ssBackToTop
 
 
-   /* smoothscroll
-    * ------------------------------------------------------ */
+    /* smoothscroll
+     * ------------------------------------------------------ */
     const ssMoveTo = function(){
 
         const easeFunctions = {
@@ -334,7 +333,7 @@
         }
 
         const triggers = document.querySelectorAll('.smoothscroll');
-        
+
         const moveTo = new MoveTo({
             tolerance: 0,
             duration: 1200,
@@ -349,8 +348,8 @@
     }; // end ssMoveTo
 
 
-   /* Initialize
-    * ------------------------------------------------------ */
+    /* Initialize
+     * ------------------------------------------------------ */
     (function ssInit() {
 
         ssPreloader();
