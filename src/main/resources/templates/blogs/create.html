@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{Layout}">
+<head>
+  <th:block th:replace="layout::link-css"></th:block>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{css/base.css}">
+  <link th:fragment="link-css" rel="stylesheet" th:href="@{css/main.css}">
+  <title>Spurgeon</title>
+</head>
+
+
+<body>
+<th:block th:replace="layout::header"></th:block>
+
+  <!-- # site-content
+  ================================================== -->
+  <div layout:fragment="content">
+    <!-- NỘI DUNG TRANG CON -->
+    <div class="container">
+      <h1>Add Blog</h1>
+      <form th:action="@{/admin/blog/create}" th:object="${blog}" enctype="multipart/form-data" method="post"?>
+        <div class="col-6 mb-3">
+          <label class="form-label" for="title" >Title: </label>
+          <input class="form-control" type="text" th:field="*{title}" id="title">
+          <span class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+          <label class="form-label" for="describe" >Describe: </label>
+          <textarea class="form-control" type="text" th:field="*{describe}" id="describe"></textarea>
+          <span class="text-danger" th:if="${#fields.hasErrors('describe')}" th:errors="*{describe}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+          <label class="form-label" for="author" >Author: </label>
+          <input class="form-control" type="text" th:field="*{author}" id="author">
+          <span class="text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></span>
+        </div>
+
+        <div class="col-6 mb-3">
+          <label class="form-label" for="createDate" >createDate: </label>
+          <input class="form-control" type="date" th:field="*{createDate}" id="createDate">
+          <span class="text-danger" th:if="${#fields.hasErrors('createDate')}" th:errors="*{createDate}"></span>
+        </div>
+
+        <div class="form-group"> <label for="image">Image:</label>
+          <input class="form-control" type="file" name="imageBlog" id="image" accept="image/png,image/jpeg">
+          <div class="alert alert-warning" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></div>
+        </div>
+
+        <div class="col-6 mb-3">
+          <label class="form-label" for="url" >URL: </label>
+          <input class="form-control" type="text" th:field="*{url}" id="url">
+          <span class="text-danger" th:if="${#fields.hasErrors('url')}" th:errors="*{url}"></span>
+        </div>
+
+        <input type="submit" class="btn btn-primary" value="Save">
+      </form>
+      <br>
+      <a th:href="@{/admin/blog}">Back to List</a>
+    </div>
+  </div>
+<th:block th:replace="layout :: footer"></th:block>
+</div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{Layout}">
+<head>
+    <th:block th:replace="layout::link-css"></th:block>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{css/base.css}">
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{css/main.css}">
+    <title>Spurgeon</title>
+</head>
+
+<body>
+<th:block th:replace="layout::header"></th:block>
+    <div style="margin: 50x0px" layout:fragment="content">
+        <div class="container">
+            <br>
+            <h2>Blog List</h2>
+            <a th:href="@{/admin/blog/create}" class="btn btn-primary btn-sm mb-3">Add New Blog</a>
+            <table class="table table-striped table-resposive-md">
+                <th>Id</th>
+                <th>Title</th>
+                <th>Describe</th>
+                <th>Author</th>
+                <th>createDate</th>
+                <th>Image</th>
+                <th>Url</th>
+                <th>Action</th>
+            <tbody>
+            <tr th:each="blog : ${listBlog}">
+                <td th:text="${blog.id}"></td>
+                <td th:text="${blog.title}"></td>
+                <td th:text="${blog.describe}"></td>
+                <td th:text="${blog.author}"></td>
+                <td th:text="${blog.createDate}"></td>
+                <td>
+                    <img height="120" width="150" th:src="@{/images/} + ${blog.image}">
+                </td>
+                <td >
+                    <a th:href="${blog.url}">Xem thêm</a>
+
+                </td>
+
+                <!--đây là cái nút-->
+                <td><a
+                        th:href="@{/admin/blog/del/{id} (id=${blog.id})}"
+                        onclick="return confirm('Are you sure?')"
+                        class="btn btn-primary">Remove</a></td>
+                <td><a
+                        th:href="@{/admin/blog/edit/{id} (id=${blog.id})}"
+                        class="btn btn-primary">Edit</a></td>
+                <td><a
+                        th:href="@{/admin/blog/detail/{id} (id=${blog.id})}"
+                        class="btn btn-primary">Detail</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+            <div th:if = "${totalPages > 1}">
+                <div class = "row col-sm-10">
+                    <div class = "col-sm-2">
+                        Total Rows: [[${totalItems}]]
+                    </div>
+                    <div class = "col-sm-1">
+     <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+         <a th:if="${currentPage != i}" th:href="@{'/admin/blog/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+
+      <span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+     </span>
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/blog/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+
+                        <a th:if="${currentPage < totalPages}" th:href="@{'/admin/blog/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                </div>
+            </div>
+    </div>
+
+    <!-- # site-footer
+    ================================================== -->
+    </div>
+</div>
+</body>
+<th:block th:replace="layout :: footer"></th:block>
+
+</html>
