@@ -34,7 +34,9 @@ public class Product {
     @JoinColumn(name = "id_category")
     private Category category;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
 
     public Product(){}
 
