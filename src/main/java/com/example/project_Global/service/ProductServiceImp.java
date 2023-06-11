@@ -17,8 +17,6 @@ public class ProductServiceImp implements ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-
-
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
@@ -27,7 +25,10 @@ public class ProductServiceImp implements ProductService {
     @Override
     public void saveProduct(Product product) {
         this.productRepository.save(product);
-
+    }
+    @Override
+    public void update(Product product){
+        this.productRepository.save(product);
     }
 
     @Override
@@ -41,6 +42,7 @@ public class ProductServiceImp implements ProductService {
         }
         return product;
     }
+
     @Override
     public void deleteProductById(int id) {
         this.productRepository.deleteById(id);

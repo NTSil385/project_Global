@@ -40,7 +40,7 @@
 
 
                 <p style="margin: 20px 0px">
-                    <a href="~/Admin/Index?" class="btn btn-primary">Eidt</a>
+                    <a th:href="@{/admin/edit/{id}(id=${product.id})}" class="btn btn-primary">Edit</a>
                     <a th:href="@{/admin}" class="btn btn-primary" >Back</a>
                 </p>
 

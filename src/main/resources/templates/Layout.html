@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" lang="en" class="no-js"
-      xmlns:sec="http://www.thmeleaf.org/thymeleaf-extras-pringsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml" lang="en" class="no-js">
 <head>
     <!--- basic page needs
     ================================================== -->
@@ -17,7 +16,7 @@
     ================================================== -->
     <link th:fragment="link-css" rel="stylesheet" th:href="@{css/vendor.css}">
     <link th:fragment="link-css" rel="stylesheet" th:href="@{css/styles.css}">
-
+    <link th:fragment="link-css" rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- favicons
     ================================================== -->
     <link  rel="apple-touch-icon" sizes="180x180" th:href="@{apple-touch-icon.png}">
@@ -63,8 +62,8 @@
                 <h3 class="s-header__nav-heading">Navigate to</h3>
 
                 <ul class="s-header__nav">
-                    <li class="current-menu-item"><a href="index.html" title="">Home</a></li>
-                    <li class="has-children" style="height: 50px;">
+                    <li class="current-menu-item"><a th:href="@{http://localhost:8080}" title="">Home</a></li>
+                    <li class="has-children">
                         <a href="#0" title="" class="">Categories</a>
                         <ul class="sub-menu">
                             <li><a href="category.html">YSL</a></li>
@@ -73,7 +72,7 @@
                             <li><a href="category.html">DIOR</a></li>
                         </ul>
                     </li>
-                    <li class="has-children" style="height: 50px;">
+                    <li class="has-children">
                         <a href="#0" title="" class="">Blog</a>
                         <ul class="sub-menu">
                             <li><a href="single-standard.html">Standard Post</a></li>
@@ -81,17 +80,11 @@
                             <li><a href="single-audio.html">Audio Post</a></li>
                         </ul>
                     </li>
-                    <li><a href="styles.html" title="">Styles</a></li>
-                    <li><a href="about.html" title="">About</a></li>
+                    <li><a th:href="@{/shop}" title="">Shop</a></li>
                     <li><a href="contact.html" title="">Contact</a></li>
-                    <li sec:authorize="isAuthenticated()">
-                        <form th:action="@{/logout}" method="post">
-                            <button type="submit">Logout</button>
-                        </form>
-                    </li>
-                    <li sec:authorize="!isAuthenticated()">
-                        <a href="/login"><button>Login</button></a>
-                    </li>
+                    <li><a th:href="@{/shoppingcart/showcart}" title="">
+                        <i class="fa-sharp fa-solid fa-bag-shopping"></i>
+                    </a></li>
                 </ul> <!-- end s-header__nav -->
 
             </nav> <!-- end s-header__nav-wrap -->
@@ -250,10 +243,11 @@
 
     </footer><!-- end s-footer -->
 
-
+</div>
     <!-- Java Script
     ================================================== -->
     <script th:src="@{js/plugins.js}"></script>
     <script th:src="@{js/main.js}"></script>
+
 </body>
 </html>

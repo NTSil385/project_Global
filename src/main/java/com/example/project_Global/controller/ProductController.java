@@ -36,13 +36,15 @@ public class ProductController {
         return findPaginated(1, "name", "asc", model);
     }
 
-
     @GetMapping("/{id}")
     // Let's return an object with: data, message, status
     public String findById(@PathVariable("id") int id, Model model){
+
         Product found = productService.getProductById(id);
+//        Category cate=found.getCategory();
         if(found != null){
             model.addAttribute("productById",found);
+//            model.addAttribute("categoryName",cate.getName());
             return "Admins/details";
         }else{
             return "not-found";
@@ -81,25 +83,19 @@ public class ProductController {
         productService.saveProduct(newProduct);
         return "redirect:/admin";
     }
-
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Integer id, Model model){
-        Product editProduct = null;
-        for(Product product : productService.getAllProducts()){
-            if(product.getId() == id){
-                editProduct = product;
-            }
-        }
+        Product editProduct = productService.getProductById(id);
         if(editProduct != null){
-            model.addAttribute("product",editProduct);
+            model.addAttribute("product", editProduct);
+            model.addAttribute("cate", categoryRepository.findAll());
             return "Admins/edit";
-        }else{
+        }else {
             return "not-found";
         }
     }
-
-    @PostMapping ("/edit")
-    public String edit(@Valid @ModelAttribute("product") Product updatedProduct, @ModelAttribute("cate") Category updatedCategory
+    @PostMapping("/edit")
+    public String edit(@Valid @ModelAttribute("product") Product updatedProduct
             ,@RequestParam("imageProduct") MultipartFile imageProduct, BindingResult bindingResult, Model model)throws IOException{
         if(bindingResult.hasErrors()){
             return "Admins/edit";
@@ -115,15 +111,18 @@ public class ProductController {
             Product product = productService.getAllProducts().get(i);
             if(product.getId() == updatedProduct.getId()){
                 productService.getAllProducts().set(i,updatedProduct);
-                productService.saveProduct(updatedProduct);
+                productService.update(updatedProduct);
                 break;
             }
         }
+        productService.update(updatedProduct);
         return "redirect:/admin";
     }
-
-
-
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Integer id){
+        productService.deleteProductById(id);
+        return "redirect:/admin";
+    }
     @GetMapping("/page/{pageNo}")
     public String findPaginated(@PathVariable(value = "pageNo") int pageNo, @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir, Model model) {
