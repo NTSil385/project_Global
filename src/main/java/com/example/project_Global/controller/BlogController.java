@@ -42,13 +42,13 @@ public String index(Model model) {
     public String showCreateForm(Model model) {
         Blog newBlog = new Blog();
         model.addAttribute("blog", newBlog);
-        return "blogs/create";
+        return "Admins/Blog/create";
     }
     @PostMapping("/create")
     public String create(@Valid Blog newBlog, @RequestParam("imageBlog") MultipartFile imageBlog, BindingResult result, Model model) throws IOException {
         if(result.hasErrors()){
             model.addAttribute("blog", newBlog);
-            return "blogs/create";
+            return "Admins/Blog/create";
         }
         if(imageBlog !=null && imageBlog.getSize()>0){
             StringBuilder fileNames = new StringBuilder();
@@ -119,7 +119,7 @@ public String index(Model model) {
         if(editBlog != null){
             model.addAttribute("blog", editBlog);
             model.addAttribute("listBlog",blogService.getAll());
-            return "blogs/edit";
+            return "Admins/Blog/edit";
         }else {
             return "not-found";
         }
@@ -128,7 +128,7 @@ public String index(Model model) {
     public String edit(@Valid @ModelAttribute("blog") Blog updateBlog
             ,@RequestParam("imageBlog") MultipartFile imageBlog, BindingResult bindingResult, Model model)throws IOException{
         if(bindingResult.hasErrors()){
-            return "blogs/edit";
+            return "Admins/Blog/edit";
         }
         if(imageBlog != null && imageBlog.getSize() > 0) {
             StringBuilder fileNames = new StringBuilder();
@@ -155,7 +155,7 @@ public String index(Model model) {
             return "not-found";
         }else {
             model.addAttribute("blog",blog);
-            return "blogs/detail";
+            return "Admins/Blog/detail";
         }
     }
     @GetMapping("/page/{pageNo}")
@@ -176,7 +176,7 @@ public String index(Model model) {
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("listBlog", listBlog);
-        return "blogs/blog_index";
+        return "Admins/Blog/blog_index";
     }
 
 }

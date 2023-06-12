@@ -23,11 +23,30 @@ public class HomeController {
         return "view/index";
     }
 
-    @GetMapping ("/shop")
+    @GetMapping ("shops")
     public String showshop(Model model) {
         model.addAttribute("products", productService.getAllProducts());
         return findPaginated(1, "name", "asc", model);
-
+    }
+    @GetMapping ("YSL")
+    public String showYSL(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "View/Shop/YSL.html";
+    }
+    @GetMapping ("Celine")
+    public String showCeline(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "View/Shop/Celine.html";
+    }
+    @GetMapping ("Chanel")
+    public String showChanel(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "View/Shop/Chanel.html";
+    }
+    @GetMapping ("Dior")
+    public String showDior(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
+        return "View/Shop/Dior.html";
     }
 
     @GetMapping("/shop/{id}")
@@ -60,7 +79,7 @@ public class HomeController {
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
 
         model.addAttribute("products", listProduct);
-        return "View/shop";
+        return "View/Shop";
     }
 
 }
