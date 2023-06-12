@@ -16,7 +16,7 @@
 
 <div layout:fragment="content">
     <!-- NỘI DUNG TRANG CON -->
-    <div class="container">
+    <div class="container" style="margin: 110px">
         <h1>Edit Blog</h1>
         <form th:action="@{/admin/blog/edit}" th:object="${blog}" enctype="multipart/form-data" method="post"?>
             <div class="col-6 mb-3">
@@ -49,7 +49,8 @@
             </div>
 
             <div class="form-group"> <label for="image">Image:</label>
-                <input class="form-control" type="file" name="imageBlog" id="image" accept="image/png,image/jpeg">
+                <input class="form-control" type="text" th:field="*{image}" id="image">
+                <input class="form-control" type="file" name="imageBlog" accept="image/png,image/jpeg">
                 <div class="alert alert-warning" th:if="${#fields.hasErrors('image')}" th:errors="*{image}"></div>
             </div>
 

@@ -163,7 +163,7 @@ public String index(Model model) {
                                 @RequestParam("sortField") String sortField,
                                 @RequestParam("sortDir") String sortDir,
                                 Model model) {
-        int pageSize = 2;
+        int pageSize = 4;
         Page<Blog> page = blogService.findPaginated(pageNo, pageSize, sortField, sortDir);
         List<Blog> listBlog = page.getContent();
 

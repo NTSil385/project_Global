@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml"
-      layout:decorate="~{Layout}">
+      layout:decorate="~{ADMIN}">
 <head>
   <th:block th:replace="layout::link-css"></th:block>
   <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
@@ -17,34 +17,31 @@
 <th:block th:replace="layout::header"></th:block>
 
 <div layout:fragment="content" style="margin: 110px">
+
   <div class="container">
-    <table>
-      <table class="table table-striped table-resposive-md">
-        <th>Title</th>
-        <th>Describe</th>
-        <th>Author</th>
-        <th>createDate</th>
-        <th>Image</th>
-        <th>Url</th>
-        <tbody>
-      <tr th:each="blog : ${blog}">
-        <td th:text="${blog.title}"></td>
-        <td th:text="${blog.describe}"></td>
-        <td th:text="${blog.author}"></td>
-        <td th:text="${blog.createDate}"></td>
-        <td>
-          <img height="120" width="150" th:src="@{/images/} + ${blog.image}">
-        </td>
-        <td >
-          <!--<a th:href=${blog.Url}">${blog.Url}</a>-->
-          <a th:href="${blog.url}">Xem thêm</a>
+    <div class="row">
+      <div  th:each="blog : ${blog}" class="col-9 col-md-9">
+        <div class="thumbnail" style="border: 1px solid #ccc; display:flex; justify-content:center; border-radius:6px">
+          <img  style="max-width: 100%; height: auto" th:src="@{/images/} + ${blog.image}">
+        </div>
+        <div class="caption" style="margin-top: 10px">
 
-        </td>
-      </tr>
-    </table>
-    <a th:href="@{/blog}">Back to List</a>
+          <strong>Title: </strong><div th:text="${blog.title}"></div>
 
-  </div>
+        </div>
+        <strong>Description:</strong> </strong><div th:text="${blog.describe}"></div>
+        <strong>Author:</strong> </strong><div th:text="${blog.author}"></div>
+        <strong>Date:</strong> </strong><div th:text="${blog.createDate}"></div>
+        <strong>URl:</strong> </strong><div th:text="${blog.url}"></div>
+
+        <p style="margin: 20px 0px">
+          <a th:href="@{/admin/blog}" class="btn btn-primary" >Back</a>
+        </p>
+
+
+      </div>
+
+    </div>
 <th:block th:replace="layout :: footer"></th:block>
 </div>
 </body>

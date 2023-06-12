@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>FI</title>
+  <th:block th:replace="layout::link-css"></th:block>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/vendor.css}" />
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div layout:fragment="content">
+  <div class="container" style="margin: 110px">
+    <h2>Blog</h2>
+    <div class="row">
+      <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+      <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+      <div th:each="blog:${listBlog}" class="col-3 col-s-3" style="width: 500px; margin:25px 25px">
+        <div class="panel panel-default" style="border: 1px solid #ccc; border-radius: 6px; margin: 4px; height: auto">
+          <div class="item" style="padding: 10px">
+            <div class="panel-heading" style="margin: 15px 0px; height:75px; display: flex; align-items: center; justify-content: space-between">
+              <div style="margin-right:10px;"><strong th:text="${blog.title}"></strong></div>
+
+            </div>
+            <div class="panel-body" style="margin: 5px 0">
+              <div class="img-responsive" style="display: flex; max-height: 300px;">
+                <img th:src="@{/images/} + ${blog.image}" alt="hinh thumnail" class="img-responsive" style="max-width:100%; height: 300px; margin: 4px auto" />
+              </div>
+              <div class="box" style="margin: 10px 0px">
+                <strong>Describe:</strong><div th:text="${blog.describe}"></div>
+
+              </div>
+              <div class="panel-footer clearfix" style="display: flex; justify-content: flex-end">
+                <div class="pull-right" style="display: inline-flex; justify-content: flex-end;">
+                  <a th:href="${blog.url}" class="btn btn-primary" >Read More</a>
+                  <style>
+                    .btn{
+                      width: auto;
+                      display: inline-flex;
+                      justify-content: center;
+                    }
+                  </style>
+                </div>
+                <style>
+                  .btn{
+                    width: auto;
+                    display: inline-flex;
+                    justify-content: center;
+                  }
+                </style>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+    <div th:if="${totalPages > 1}">
+      <div class="row col-sm-10" style="margin: 20px;display: flex; justify-content:center; align-items: center;">
+        <div class="col-sm-2" style="margin: 0px 20px">Total Rows: [[${totalItems}]]</div>
+        <div class="col-sm-1" style="margin: 0px 10px">
+          <a th:if="${currentPage < totalPages}"
+             th:href="@{'/blog/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+             class="btn btn-primary">Next</a>
+          <span class="btn btn-primary" th:unless="${currentPage < totalPages}">Next</span>
+        </div>
+
+        <div class="col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                      <a
+                              th:if="${currentPage != i}"
+                              th:href="@{'/blog/page/' +${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span class="btn btn-primary" th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
+						&nbsp;
+					</span>
+        </div>
+        <div class="col-sm-1">
+          <a th:if="${currentPage < totalPages}"
+             th:href="@{'/blog/page/'  + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" class="btn btn-primary">Last</a>
+          <span th:unless="${currentPage < totalPages}" class="btn btn-primary">Last</span>
+        </div>
+      </div>
+    </div>
+    <br>
+
+
+    <!-- # site-footer
+    ================================================== -->
+  </div>
+</div>
+
+
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
