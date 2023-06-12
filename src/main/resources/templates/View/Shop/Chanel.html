@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{Layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>FI</title>
+    <th:block th:replace="layout::link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div layout:fragment="content">
+
+    <div class="container" style="margin: 110px">
+        <div class="row">
+            <link rel="stylesheet" type="text/css" th:href="@{/css/main.css}" />
+            <link rel="stylesheet" type="text/css" th:href="@{/css/base.css}" />
+            <div th:each="product:${products}" class="col-3 col-s-3" style="width: 370px; margin:10px 6px">
+                <th:block th:if="${product.category.id_category==3}">
+                    <div class="panel panel-default" style="border: 1px solid #ccc; border-radius: 6px; margin: 4px; height: 643px">
+                        <div class="item" style="padding: 10px">
+                            <div class="panel-heading" style="margin: 15px 0px; height:75px; display: flex; align-items: center; justify-content: space-between">
+                                <div style="margin-right:10px;"><strong th:text="${product.name}"></strong></div>
+
+
+                            </div>
+                            <div class="panel-body" style="margin: 5px 0">
+                                <div class="img-responsive" style="display: flex; max-height: 300px;">
+                                    <img th:src="@{/img/} + ${product.image}" alt="hinh thumnail" class="img-responsive" style="max-width:100%; height: 300px; margin: 4px auto" />
+                                </div>
+                                <div class="box" style="margin: 10px 0px">
+                                    <strong>Price:</strong><div th:text="${product.price}"></div>
+                                    <strong>Brand: </strong><div th:text="${product.category.name}"></div>
+                                </div>
+                                <div class="panel-footer clearfix" style="display: flex;justify-content: flex-end;">
+                                    <div class="pull-right" style="display: inline-flex; justify-content: flex-end" >
+                                        <a th:href="@{/shop/{id}(id=${product.id})}" class="btn btn-primary" >Details</a>
+                                        <a th:href="@{/shoppingcart/add/{id}(id=${product.id})}" class="btn btn-primary">Add</a>
+                                    </div>
+                                    <style>
+                                    .btn{
+                                        width: 40%;
+                                        display: inline-flex;
+                                        justify-content: center;
+                                    }
+                                </style>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </th:block>
+
+            </div>
+        </div>
+
+        <div th:if="${totalPages > 1}">
+            <div class="row col-sm-10" style="display: flex; justify-content:center; align-items: center;">
+                <div class="col-sm-2" style="margin: 0px 20px">Total Products: [[${totalItems}]]</div>
+                <div class="col-sm-1" style="margin: 0px 10px">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{'/page/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}"
+                       class="btn btn-primary">Next</a>
+                    <span class="btn btn-primary" th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                      <a
+                              th:if="${currentPage != i}"
+                              th:href="@{${local}+${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span class="btn btn-primary" th:unless="${currentPage != i}">[[${i}]]</span> &nbsp;
+						&nbsp;
+					</span>
+                </div>
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}"
+                       th:href="@{${local} + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}" class="btn btn-primary">Last</a>
+                    <span th:unless="${currentPage < totalPages}" class="btn btn-primary">Last</span>
+                </div>
+            </div>
+        </div>
+        <!-- end s-content -->
+    </div>
+    <!-- end s-content -->
+</div>
+
+<th:block th:replace="layout :: footer"></th:block>
+</body>
+</html>
